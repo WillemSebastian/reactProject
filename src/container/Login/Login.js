@@ -1,28 +1,41 @@
 import React from 'react';
 import { ImageBackground, StyleSheet, Text, View, Image } from 'react-native';
+import { Input, Button } from 'native-base';
 
-import image2 from '../../../assets/image2.jpg';
-import universal from '../../../assets/universal.png';
+import sea from '../../../assets/sea.jpg';
+import node from '../../../assets/node.png';
 
 const Login = (props) => (
  
-    <ImageBackground source = {image2} style={styles.backgroundContainer} >
+    <ImageBackground source = {sea} style={styles.backgroundContainer} >
         <View style ={styles.LogoContainer}>
-            <Text>Image 1</Text>
-            
+            <Image source = {node} style={styles.Logo}>
+            </Image>
         </View>
+            <Input style={styles.LoginInput} placeholder='Username' />
+            <Input style={styles.LoginInput} placeholder='Password' />
+            {/* <View style ={styles.LogoContainer}> */}
+                <Button 
+                light 
+                style={styles.LoginButton}
+                click={loginEventHandler}><Text>Login</Text></Button>
+            {/* </View> */}
     </ImageBackground>
 )
 
+    loginEventHandler = () => { 
+        alert('Success');
+    };
+
 const styles = StyleSheet.create({
     backgroundContainer: {
-        flex: 1,
+        // flex: 1,
         width: null,
-        height: null,
+        height: 700,
         zIndex: -1,
         justifyContent: 'center',
         alignItems: 'center',
-
+  
     },
 
     LogoContainer: {
@@ -30,9 +43,29 @@ const styles = StyleSheet.create({
     },
 
     Logo: { 
-        width: 50,
+        width: 180,
         height: 100,
         zIndex: 1,
+    },
+
+    LoginInput: {
+        backgroundColor: 'white',
+        width: '80%',
+        maxHeight: 50,
+        marginTop: 20,
+        textAlign: 'center',
+        borderRadius: 20,
+    },
+
+    LoginButton: {
+        backgroundColor: 'lightblue',
+        width: 320,
+        top: 130,
+        left: '7%',
+        maxHeight: 80,
+        marginTop: 50,
+        borderRadius: 20,
+        paddingLeft: '35%',
     }
 })
 export default Login;
