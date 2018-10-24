@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
-import Expo from 'expo';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import FooterApp from '../../components/Footer/Footer';
 import NavigationButton from '../../components/Navigation/NavigationItems/NavigationButton';
-import { Container,Content, Badge, Card, CardItem, Item, Input, Body, Title, Right, Header, Footer, FooterTab, Button, Left } from 'native-base';
+import { Container, Content, CardItem,  Input, Body, Button } from 'native-base';
 
 export default class Dashboard extends React.Component {
 
@@ -15,14 +15,17 @@ export default class Dashboard extends React.Component {
         style={styles.BackgroundImage}
         source={{uri: 'https://i.ytimg.com/vi/29Y8F6eMM9g/maxresdefault.jpg'}}
         />
-        
+        <View style = {{flexDirection: 'row'}}>
           <Input style={styles.SearchBar} placeholder='Search'/>
           <Button transparent>
             <Icon 
-            style={{color: 'white', position: 'relative'}}
-            name='th-list' />
+            size={Icon.size || 30}
+            style={{color: 'white', padding: 30, marginTop: 50}}
+            active name='th-list' />
           </Button>
-        <Content style={styles.container}>
+        </View>
+        <Content>
+          <View style={styles.container}>
         <View style={styles.center}>
           <Image
             style={styles.ProfileImage}
@@ -32,46 +35,48 @@ export default class Dashboard extends React.Component {
      
         <CardItem style={styles.Box}>
             <Body style={styles.CardProfileContent}>
-            <Text>
+            <Text style={{color: 'blue', fontWeight: 'bold', fontSize: 20}}>
                 Willem Sebastian
             </Text>
             <Text>
                 Mobile Developer
             </Text>
-            <Text>
-            <Icon active name="podcast" /> Work From Home 
+            <Text style={{marginTop: 20, fontWeight: 'bold', fontSize: 15, color: 'blue'}}>
+            <Icon 
+            active name="podcast" /> Work From Home 
             </Text>
             </Body>
         </CardItem>
-
+        </View>
         <View style={styles.Dashboard}>
-          <Text>Your Dashboard</Text>
-          <Text>This is private to you</Text>
-            <NavigationButton />
-            <NavigationButton />
-            <NavigationButton />
+          <Text style ={{fontWeight:'bold'}}>Your Dashboard</Text>
+          <Text style ={{fontStyle:'italic', color: 'grey'}}>This is Private to you</Text>
+            <View>
+              
+            </View>
           </View>
-          
-          <View>
-          <Text>About</Text>
-          <Text><Icon active name="envelope" /> Willem.Sebastian@Moonlay.com</Text>
-          <Text><Icon active name="whatsapp" /> +62 818-800-845</Text>
-          <Text><Icon active name="gift" /> 12 September 1991</Text>
+          <View style={styles.containerAbout}>
+          <Text style = {{fontWeight: 'bold'}}>
+            About
+          </Text>
+          <Text style = {{marginTop: 20}}>
+            <Icon 
+            size={Icon.size || 20}
+            active name="envelope" />   Willem.Sebastian@Moonlay.com
+          </Text>
+          <Text style = {{marginTop: 10}}>
+            <Icon 
+            size={Icon.size || 20}
+            active name="whatsapp" />   +62 818-800-845
+          </Text>
+          <Text style = {{marginTop: 10}}>
+            <Icon
+            size={Icon.size || 20}
+            active name="gift" />   12 September 1991
+          </Text>
           </View>
         </Content>
-       
-        <Footer>
-          <FooterTab>
-            <Button>
-              <Icon 
-              style = {{color: 'white'}}
-              active name="user-o" />
-            </Button>
-            <Button>
-              <Icon active name="bell-o" />
-            </Button>
-          </FooterTab>
-        </Footer>
+        <FooterApp />
       </Container>
   
     );
@@ -105,7 +110,7 @@ const styles = StyleSheet.create({
     maxWidth: '75%',
     position: 'relative',
     zIndex: 1,
-    marginTop: '5%',
+    marginTop: '7%',
     marginLeft: '5%',
   },
 
@@ -114,11 +119,13 @@ const styles = StyleSheet.create({
     height: 100,  
     borderRadius: 100,
     position: 'relative',
+    marginTop: '5%',
   },
 
   Dashboard: {
     backgroundColor: 'whitesmoke',
     height: 150,
+    padding: '5%',
   },
 
   Box:{
@@ -131,6 +138,10 @@ const styles = StyleSheet.create({
   CardProfileContent: {
     alignItems: 'center',
     marginTop: 50,
+  },
+
+  containerAbout: {
+    padding: '5%',
   }
 
 });

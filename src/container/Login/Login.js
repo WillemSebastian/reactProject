@@ -1,31 +1,50 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { ImageBackground, StyleSheet, Text, View, Image } from 'react-native';
 import { Input, Button } from 'native-base';
+import PropTypes from 'prop-types';
 
 import sea from '../../../assets/sea.jpg';
 import node from '../../../assets/node.png';
 
-const Login = (props) => (
- 
-    <ImageBackground source = {sea} style={styles.backgroundContainer} >
-        <View style ={styles.LogoContainer}>
-            <Image source = {node} style={styles.Logo}>
-            </Image>
-        </View>
-            <Input style={styles.LoginInput} placeholder='Username' />
-            <Input style={styles.LoginInput} placeholder='Password' />
-            {/* <View style ={styles.LogoContainer}> */}
-                <Button 
-                light 
-                style={styles.LoginButton}
-                click={loginEventHandler}><Text>Login</Text></Button>
-            {/* </View> */}
-    </ImageBackground>
-)
+class Login extends Component {
+    state = {
+        username : 'willem',
+        password : 'sebastian',
+    }
+    
+    render() {
 
-    loginEventHandler = () => { 
-        alert('Success');
-    };
+        loginEventHandler = () => { 
+            console.log("a");
+        };
+
+        if(this.state.username == 'willem' && this.state.password == 'sebastian'){
+            return(
+                <ImageBackground source = {sea} style={styles.backgroundContainer} >
+                    <View style ={styles.LogoContainer}>
+                        <Image source = {node} style={styles.Logo}>
+                        </Image>
+                    </View>
+                        <Input style={styles.LoginInput} onChange = {console.log('b')} placeholder='Username' />
+                        <Input style={styles.LoginInput} onClick = {console.log('c')} placeholder='Password' />
+                        {/* <View style ={styles.LogoContainer}> */}
+                            <Button 
+                            light 
+                            style={styles.LoginButton}
+                            clicked={loginEventHandler}><Text>Login</Text></Button>
+                        {/* </View> */}
+                </ImageBackground>
+            )
+        } 
+        else {
+            return(
+                <Text>a</Text>
+            )
+        }
+    }
+}
+
+    
 
 const styles = StyleSheet.create({
     backgroundContainer: {

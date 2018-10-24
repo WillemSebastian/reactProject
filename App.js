@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView } from 'react-native';
 import Expo from 'expo';
 import Login from './src/container/Login/Login';
+import Checkin from './src/container/Checkin/Checkin';
 import Dashboard from './src/container/Dashboard/Dashboard';
 
 export default class App extends React.Component {
@@ -22,9 +23,9 @@ export default class App extends React.Component {
       return <Expo.AppLoading />;
     }
     return (
-      <ScrollView>
+     
         <Login />
-      </ScrollView>
+      
     );
   }
 }
