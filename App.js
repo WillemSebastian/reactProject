@@ -1,31 +1,43 @@
-import React from 'react';
-import { ScrollView } from 'react-native';
-import Expo from 'expo';
-import Login from './src/container/Login/Login';
-import Checkin from './src/container/Checkin/Checkin';
-import Dashboard from './src/container/Dashboard/Dashboard';
-
-export default class App extends React.Component {
-  state={
-    isReady: false
-  }
-
-  async componentWillMount() {
-  await Expo.Font.loadAsync({
-    'Roboto': require('native-base/Fonts/Roboto.ttf'),
-    'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
-  });
-  this.setState({isReady:true})
+if (__DEV__) {
+  require('react-devtools');
 }
+import React, { Component } from 'react'
+import { Provider, connect } from 'react-redux'
+import { createStore, applyMiddleware, combineReducers } from 'redux'
+import { reduxifyNavigator, createReactNavigationReduxMiddleware, createNavigationReducer } from 'react-navigation-redux-helpers'
+import AppNavigator from './src/components/Navigation/NavigationItems/AppNavigator'
+import headerTextReducer from './src/redux/reducers/headerTextReducer'
+import bottomSubmitButtonTextReducer from './src/redux/reducers/bottomSubmitButtonTextReducer'
+import getCheckinLocationReducer from './src/redux/reducers/getCheckinLocationReducer'
 
-  render() {
-    if (!this.state.isReady) {
-      return <Expo.AppLoading />;
-    }
-    return (
-     
-        <Login />
-      
-    );
+const navReducer = createNavigationReducer(AppNavigator)
+const appReducer = combineReducers({
+  nav: navReducer, headerTextReducer, bottomSubmitButtonTextReducer, getCheckinLocationReducer
+})
+
+const middleware = createReactNavigationReduxMiddleware(
+  "root",
+  state => state.nav
+)
+
+const App = reduxifyNavigator(AppNavigator, "root")
+const mapStateToProps = (state) => ({
+  state: state.nav,
+})
+
+const AppWithNavigationState = connect(mapStateToProps)(App)
+
+const store = createStore(
+  appReducer,
+  applyMiddleware(middleware),
+)
+
+export default class Root extends Component {
+  render(){
+    return(
+      <Provider store = {store}>
+        <AppWithNavigationState />
+      </Provider>
+    )
   }
 }

@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "reactProject",
+    "name": "E-Workplace",
     "description": "This project is really great.",
     "slug": "reactProject",
     "privacy": "public",
@@ -20,8 +20,10 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true
+
+    "android": {
+      "package": "host.moonlay.eworkplace"
     }
+    
   }
 }

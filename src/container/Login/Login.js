@@ -1,90 +1,75 @@
 import React, { Component } from 'react';
-import { ImageBackground, StyleSheet, Text, View, Image } from 'react-native';
-import { Input, Button } from 'native-base';
-import PropTypes from 'prop-types';
-
-import sea from '../../../assets/sea.jpg';
-import node from '../../../assets/node.png';
-
+import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { Input, Button, Item, Form, Content, Container, Label } from 'native-base';
+import Metrix from '../../components/Utility/Metrix';
+import login from '../../../assets/login.png';
 class Login extends Component {
+
     state = {
-        username : 'willem',
-        password : 'sebastian',
+        username : 'Username',
+        password : 'Password',
+        login: 'false',
     }
+    
+    loginEventHandler = () => { 
+        if (this.state.username == 'React' && this.state.password == 'Native'){
+            this.setState({login: true});
+            this.props.navigation.navigate('Dashboard');
+        }
+        else{
+            this.setState({login: 'Login Failed'});
+            alert(this.state.login);
+        }
+    };
     
     render() {
-
-        loginEventHandler = () => { 
-            console.log("a");
-        };
-
-        if(this.state.username == 'willem' && this.state.password == 'sebastian'){
-            return(
-                <ImageBackground source = {sea} style={styles.backgroundContainer} >
-                    <View style ={styles.LogoContainer}>
-                        <Image source = {node} style={styles.Logo}>
-                        </Image>
-                    </View>
-                        <Input style={styles.LoginInput} onChange = {console.log('b')} placeholder='Username' />
-                        <Input style={styles.LoginInput} onClick = {console.log('c')} placeholder='Password' />
-                        {/* <View style ={styles.LogoContainer}> */}
-                            <Button 
-                            light 
-                            style={styles.LoginButton}
-                            clicked={loginEventHandler}><Text>Login</Text></Button>
-                        {/* </View> */}
+        
+        return(
+          
+            <ImageBackground source = {login} style={styles.backgroundContainer} >
+                <View style= {{alignItems: 'center', padding: '5%', marginTop: Metrix.screenHeight * 0.2}}>
+                    <Text style ={{fontSize: 20, color: 'white'}}>moonlaytechnologies</Text>
+                </View>
+                    <Form>
+                        <View style = {styles.centerView}>
+                            <Item floatingLabel>
+                            <Label style = {{ color: 'white' }}>Email</Label>
+                            <Input 
+                            style = {{ color: 'white' }}
+                            onChangeText = {(text) => this.setState({username: text})}
+                            />
+                            </Item>
+                            {/* <View style = {{borderBottomColor: 'white', borderBottomWidth: 2, marginTop: 10}}></View> */}
+                            <Item floatingLabel>
+                            <Label style = {{ color: 'white' }}>Password</Label>
+                            <Input 
+                            style = {{ color: 'white' }}
+                            onChangeText = {(text) => this.setState({password: text})}
+                            />
+                            </Item>
+                            {/* <View style = {{borderBottomColor: 'white', borderBottomWidth: 2, marginTop: 10}}></View> */}
+                            <Text style = {{textAlign: 'right', marginTop: 20, color: '#ffffff' }}>Forgot Password?</Text>
+                        </View> 
+                        <Button 
+                        style = {{width: Metrix.screenWidth, backgroundColor: '#1d5fa7', position: 'absolute', top: Metrix.screenHeight * 0.63 }}
+                        onPress={this.loginEventHandler}>
+                        <Text style ={{ color: 'white', marginLeft: '45%', fontSize: 18 }}>LOG IN</Text>
+                        </Button>
+                    </Form>
                 </ImageBackground>
-            )
-        } 
-        else {
-            return(
-                <Text>a</Text>
-            )
-        }
+        )
     }
-}
-
-    
+}   
 
 const styles = StyleSheet.create({
     backgroundContainer: {
-        // flex: 1,
-        width: null,
-        height: 700,
-        zIndex: -1,
-        justifyContent: 'center',
-        alignItems: 'center',
-  
+        width: Metrix.screenWidth,
+        minHeight: Metrix.screenHeight*1.25,
     },
 
-    LogoContainer: {
-        alignItems: 'center',
+    centerView: {
+        padding: '5%',
     },
-
-    Logo: { 
-        width: 180,
-        height: 100,
-        zIndex: 1,
-    },
-
-    LoginInput: {
-        backgroundColor: 'white',
-        width: '80%',
-        maxHeight: 50,
-        marginTop: 20,
-        textAlign: 'center',
-        borderRadius: 20,
-    },
-
-    LoginButton: {
-        backgroundColor: 'lightblue',
-        width: 320,
-        top: 130,
-        left: '7%',
-        maxHeight: 80,
-        marginTop: 50,
-        borderRadius: 20,
-        paddingLeft: '35%',
-    }
 })
+
 export default Login;
